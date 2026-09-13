@@ -10,13 +10,22 @@ const serverDir = path.join(root, 'server');
 const runtimeDir = path.join(desktopDir, '.server-runtime');
 const archArg = process.argv.find((arg) => arg.startsWith('--arch='));
 const targetArch = archArg ? archArg.split('=')[1] : process.arch;
-const electronVersion = '44.3.0';
 const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 
 function run(command, args, cwd) {
   console.log(`> ${command} ${args.join(' ')}`);
-  const result = spawnSync(command, args, { cwd, stdio: 'inherit', env: process.env });
+  const result = spawnSync(command, args, {
+    cwd,
+    stdio: 'inherit',
+    env: process.env,
+    shell: process.platform === 'win32',
+  });
+
+  if (result.error) {
+    console.error(result.error);
+    process.exit(1);
+  }
+
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
 
