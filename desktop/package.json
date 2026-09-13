@@ -1,0 +1,100 @@
+{
+  "name": "ascendant-ledger-desktop",
+  "version": "1.2.0",
+  "description": "Desktop edition of Ascendant Ledger for Sim Companies",
+  "main": "main.cjs",
+  "author": "NullBot",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "prepare:runtime": "node scripts/prepare-runtime.mjs",
+    "dev": "npm run prepare:runtime && electron .",
+    "test": "node --test test/*.test.cjs",
+    "check": "node --check main.cjs && node --check lib/runtime.cjs && npm run verify:attribution && npm test",
+    "dist": "npm run prepare:runtime && electron-builder",
+    "dist:win": "npm run prepare:runtime -- --arch=x64 && electron-builder --win --x64",
+    "dist:linux": "npm run prepare:runtime -- --arch=x64 && electron-builder --linux --x64",
+    "dist:mac:x64": "npm run prepare:runtime -- --arch=x64 && electron-builder --mac --x64",
+    "dist:mac:arm64": "npm run prepare:runtime -- --arch=arm64 && electron-builder --mac --arm64",
+    "verify:attribution": "node scripts/verify-attribution.mjs"
+  },
+  "devDependencies": {
+    "electron": "44.3.0",
+    "electron-builder": "26.16.1"
+  },
+  "build": {
+    "appId": "com.nullbot.ascendantledger",
+    "productName": "Ascendant Ledger",
+    "copyright": "Copyright 2026 NullBot",
+    "directories": {
+      "output": "release",
+      "buildResources": "assets"
+    },
+    "files": [
+      "main.cjs",
+      "splash.html",
+      "lib/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": ".server-runtime",
+        "to": "server",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "artifactName": "Ascendant-Ledger-${version}-${os}-${arch}.${ext}",
+    "win": {
+      "icon": "assets/icon.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Ascendant Ledger",
+      "deleteAppDataOnUninstall": false
+    },
+    "mac": {
+      "icon": "assets/icon.png",
+      "category": "public.app-category.finance",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "identity": null
+    },
+    "dmg": {
+      "title": "Ascendant Ledger ${version}"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "category": "Office",
+      "target": [
+        "AppImage"
+      ],
+      "synopsis": "Financial dashboard for Sim Companies",
+      "description": "Self-hosted-style Sim Companies financial analytics in a desktop application."
+    },
+    "afterPack": "scripts/after-pack.cjs"
+  },
+  "homepage": "https://github.com/ItsJustMouse/ascendant-ledger",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ItsJustMouse/ascendant-ledger.git"
+  }
+}

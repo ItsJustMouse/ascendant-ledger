@@ -202,7 +202,7 @@ export function registerApiRoutes({ app, raw, qb, config }: RouteDeps): void {
       `SELECT id, name, realm FROM companies WHERE realm IN ('magnates','entrepreneurs')
        ORDER BY CASE realm WHEN 'magnates' THEN 1 ELSE 2 END`,
     );
-    return { version: '1.1.0', company, realm: company.realm, realms, settings: getSettings(raw), attribution: { creator: 'NullBot', copyrightYear: 2026, display: 'Created by NullBot | Copyright 2026' } };
+    return { version: '1.2.0', desktopMode: config.DESKTOP_MODE, company, realm: company.realm, realms, settings: getSettings(raw), attribution: { creator: 'NullBot', copyrightYear: 2026, display: 'Created by NullBot | Copyright 2026' } };
   });
 
   app.get('/api/auth/status', async (request) => {
@@ -585,7 +585,7 @@ export function registerApiRoutes({ app, raw, qb, config }: RouteDeps): void {
     const resources = all<Row>(raw, 'SELECT * FROM resource_resolved ORDER BY display_name, resource_id');
     const buildings = all<Row>(raw, 'SELECT * FROM building_resolved ORDER BY display_name, catalog_key');
     const rules = all<Row>(raw, 'SELECT * FROM core_result_rules WHERE company_id=? ORDER BY is_builtin DESC, target', [companyId]);
-    return { company, settings: getSettings(raw), resources, buildings, rules, authEnabled: config.AUTH_ENABLED };
+    return { company, settings: getSettings(raw), resources, buildings, rules, authEnabled: config.AUTH_ENABLED, desktopMode: config.DESKTOP_MODE };
   });
 
   app.put('/api/settings/company', async (request, reply) => {

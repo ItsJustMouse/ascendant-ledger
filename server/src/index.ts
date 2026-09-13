@@ -9,7 +9,7 @@ import { migrate, listApplied } from './db/migrate.js';
 import { ensureInitialUser, readSession } from './auth.js';
 import { registerApiRoutes } from './api/routes.js';
 
-const APP_VERSION = '1.1.0';
+const APP_VERSION = '1.2.0';
 const startedAt = Date.now();
 
 const db = openDatabase({

@@ -16,3 +16,8 @@ sim-companies-*.csv
 backups/
 *.sqlite
 *.sqlite3
+
+# Desktop build/runtime staging
+/desktop/node_modules/
+/desktop/.server-runtime/
+/desktop/release/
