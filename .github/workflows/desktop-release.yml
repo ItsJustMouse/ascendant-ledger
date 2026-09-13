@@ -20,7 +20,7 @@ jobs:
       matrix:
         include:
           - label: Windows x64
-            runner: windows-latest
+            runner: windows-2022
             platform: win
             arch: x64
           - label: Linux x64
