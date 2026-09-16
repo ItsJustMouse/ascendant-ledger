@@ -1,6 +1,6 @@
 # Ascendant Ledger
 
-Ascendant Ledger is an **unofficial, self-hosted financial dashboard and accounting companion for Sim Companies**. It imports the CSV exports produced by the game and turns them into persistent dashboards, statements, transaction history, product/building analytics, market analysis, import history, and reconciliation checks.
+Ascendant Ledger is an **unofficial, open-source financial dashboard and accounting companion for Sim Companies**, available as a normal desktop app or as a self-hosted Docker service. It imports the CSV exports produced by the game and turns them into persistent dashboards, statements, transaction history, product/building analytics, market analysis, import history, and reconciliation checks.
 
 It is designed for individual players who want a private, QuickBooks-style view of their Sim Companies businesses without sending their financial exports to a third-party service.
 
@@ -28,7 +28,16 @@ Ascendant Ledger automatically detects the CSV type, validates the data, prevent
 
 ![Ascendant Ledger CSV Import](docs/screenshots/import-csv.png)
 
-## Version 1.1.0 — dual Realm support
+## Version 1.2.0 — desktop apps + dual Realm support
+
+Ascendant Ledger can now be distributed in two forms:
+
+- **Desktop app (recommended for most players):** install and run it like a normal program on Windows, macOS, or Linux. No Docker, terminal, NAS, or localhost setup is required.
+- **Self-hosted / Docker:** the original deployment remains fully supported for NAS, homelab, and server users.
+
+The desktop edition runs the same open-source Ascendant Ledger backend and web interface locally on your computer, binds only to `127.0.0.1`, and stores the SQLite database in your operating system's normal application-data directory.
+
+### Dual Realm support
 
 Sim Companies allows a player to operate a separate business in each Realm. Ascendant Ledger now treats those businesses as independent ledgers:
 
@@ -150,6 +159,48 @@ The app includes deterministic checks for accounting identities, balance-sheet r
 - building mappings
 - optional single-user authentication
 - full SQLite backup download
+
+---
+
+# Desktop installation
+
+For most players, the desktop edition is the easiest way to use Ascendant Ledger.
+
+Go to the **GitHub Releases** page and download the installer for your computer:
+
+- **Windows:** `Ascendant-Ledger-<version>-win-x64.exe`
+- **macOS Apple Silicon (M1/M2/M3/M4 and newer):** `Ascendant-Ledger-<version>-mac-arm64.dmg`
+- **macOS Intel:** `Ascendant-Ledger-<version>-mac-x64.dmg`
+- **Linux:** `Ascendant-Ledger-<version>-linux-x64.AppImage`
+
+After installation:
+
+1. Open **Ascendant Ledger**.
+2. Select **Magnates** or **Entrepreneurs**.
+3. Click **Import CSV**.
+4. Choose the CSV exports downloaded from Sim Companies.
+
+No Docker or command-line setup is required. The app starts and stops its private local service automatically.
+
+### Desktop data and backups
+
+The SQLite database stays on your own computer:
+
+- Windows: `%APPDATA%\Ascendant Ledger\data`
+- macOS: `~/Library/Application Support/Ascendant Ledger/data`
+- Linux: `~/.config/Ascendant Ledger/data`
+
+The desktop **File** menu provides:
+
+- Import CSV
+- Backup Database
+- Restore Backup
+- Open Data Folder
+- Open Logs Folder
+
+The desktop application menus include update checking, the GitHub repository, bug reporting, version information, and creator attribution.
+
+> **Unsigned-build notice:** public community builds are not yet code-signed. Windows SmartScreen or macOS Gatekeeper may show a warning until signing/notarization is added. The source and automated build workflow are public for inspection.
 
 ---
 

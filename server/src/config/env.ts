@@ -44,6 +44,9 @@ const EnvSchema = z.object({
 
   /** Set to true only when running behind a reverse proxy you control. */
   TRUST_PROXY: booleanish.default('false'),
+
+  /** True when the server is embedded inside the Electron desktop app. */
+  DESKTOP_MODE: booleanish.default('false'),
 });
 
 type RawEnv = z.infer<typeof EnvSchema>;

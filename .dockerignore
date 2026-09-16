@@ -12,3 +12,7 @@ data/
 coverage/
 README.md
 docs/
+
+desktop/node_modules
+desktop/.server-runtime
+desktop/release

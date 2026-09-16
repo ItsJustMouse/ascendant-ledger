@@ -11,14 +11,14 @@ body:
     id: version
     attributes:
       label: Ascendant Ledger version
-      placeholder: 1.1.0
+      placeholder: 1.2.0
     validations:
       required: true
   - type: dropdown
     id: install
     attributes:
       label: Installation type
-      options: [Docker Compose, Local Node.js, Other]
+      options: [Desktop app, Docker Compose, Local Node.js, Other]
     validations:
       required: true
   - type: textarea
