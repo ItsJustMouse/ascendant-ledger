@@ -374,7 +374,7 @@ function buildMenu() {
           await dialog.showMessageBox(mainWindow, {
             type: 'info', title: `About ${APP_NAME}`,
             message: `${APP_NAME} ${app.getVersion()}`,
-            detail: `Self-hosted financial dashboard and CSV accounting tool for Sim Companies.\n\n${COPYRIGHT}\n\nOpen source: ${REPOSITORY_URL}`,
+            detail: `Financial dashboard and CSV accounting tool for Sim Companies.\n\n${COPYRIGHT}\n\nOpen source: ${REPOSITORY_URL}`,
           });
         } },
       ],
